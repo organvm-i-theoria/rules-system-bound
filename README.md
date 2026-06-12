@@ -14,6 +14,8 @@ The Living Container Framework provides rules for:
 ## Installation
 
 ```bash
+git clone https://github.com/organvm-i-theoria/rules-system-bound.git
+cd rules-system-bound
 pip install -e ".[dev]"
 ```
 
