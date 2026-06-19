@@ -16,7 +16,13 @@ The Living Container Framework provides rules for:
 ```bash
 git clone https://github.com/organvm-i-theoria/rules-system-bound.git
 cd rules-system-bound
-pip install -e ".[dev]"
+python3 -m pip install -e ".[dev]"
+```
+
+The package also installs a console script:
+
+```bash
+rules-system-bound --json
 ```
 
 ## Quick Start
@@ -69,6 +75,23 @@ Three types that co-constitute with real systems:
 - **WEBERIAN**: Essential function captured
 - **NORMALIZED**: Representation of real instances
 
+## Runnable Evidence
+
+From a checkout, the activation smoke path is:
+
+```bash
+PYTHONPATH=src python3 -m rules_system_bound --json
+```
+
+After installation, the release path is:
+
+```bash
+rules-system-bound --json
+```
+
+See [docs/activation-audit.md](docs/activation-audit.md) for the audit receipt
+and the exact install/test commands.
+
 ## Configuration
 
 Copy `.env.template` to `.env` and customize:
@@ -82,10 +105,13 @@ cp .env.template .env
 ```bash
 # Setup
 python -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
+python -m pip install -e ".[dev]"
 
 # Run tests
 pytest tests -v
+
+# Run activation smoke path
+rules-system-bound --json
 
 # Lint
 ruff check src tests
