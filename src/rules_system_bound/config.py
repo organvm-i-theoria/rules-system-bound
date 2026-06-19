@@ -54,10 +54,22 @@ class Config:
     @classmethod
     def from_env(cls) -> Config:
         """Load configuration from environment variables."""
-        config = {}
+        config: dict[str, Any] = {}
         for key, default in DEFAULT_CONFIG.items():
             env_key = f"{key.upper()}"
-            config[key] = os.getenv(env_key, default)
+            val = os.getenv(env_key)
+            if val is not None:
+                if isinstance(default, bool):
+                    config[key] = val.lower() in ("1", "true", "yes", "on")
+                elif isinstance(default, float):
+                    try:
+                        config[key] = float(val)
+                    except ValueError:
+                        config[key] = default
+                else:
+                    config[key] = val
+            else:
+                config[key] = default
         return cls(**config)
 
     @classmethod
